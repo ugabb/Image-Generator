@@ -6,15 +6,17 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start":"node index",
-    "des":"nodemon src/index"
+    "start": "node index",
+    "des": "nodemon src/index"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "openai": "^3.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1",
+    "react-router-dom": "^6.6.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

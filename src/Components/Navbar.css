@@ -1,0 +1,31 @@
+nav{
+    width: 100vw;
+    margin-top: 10px;
+    
+}
+
+nav ul{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav ul li{
+    list-style: none;
+    padding: 0px 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+nav a{
+    color: white;
+    text-decoration: none;
+    transition: .5s;
+}
+
+
+nav a:hover{
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid rgb(40, 251, 156);
+    color: rgb(40, 251, 156);
+}
