@@ -11,7 +11,7 @@ const Navbar = () => {
         <Link to={"/"}>
           <RiHomeLine />
         </Link>
-        <Link to={"generateimage"}>Create!</Link>
+        <Link to={"create"}>Create!</Link>
         <Link to={"/"}>
           <FiGithub />
         </Link>

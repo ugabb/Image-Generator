@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import "./App.css";
 import Navbar from "./Components/Navbar";
@@ -14,7 +14,8 @@ function App() {
          <Navbar />
          <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="generateimage" element={<Create />} />
+          <Route path="create" element={<Create />} />
+          {/* <Route path="generateimage" element={<Create />} /> */}
          </Routes>
       </BrowserRouter>
     </div>
