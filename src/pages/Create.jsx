@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Create.css";
 // const { generateImage } = require('../controllers/openaiController')
 
@@ -6,43 +6,43 @@ const Create = () => {
   const [userPrompt, setUserPrompt] = useState("dog zombie");
   const [size, setSize] = useState("");
 
+  const url = 'http://localhost:5000/create'
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(
-      JSON.stringify({
-        userPrompt,
-        size,
-      })
-    );
-    generateImageRequest(userPrompt, size);
+
+    const image = {
+      userPrompt,
+      size
+    }
+  
+    console.log(image);
+
+    generateImageRequest(image);
   };
 
-  const generateImageRequest = async (prompt, size) => {
+  const generateImageRequest = async (imageInfo) => {
     try {
-      const response = await fetch('http://localhost:5000/openai/generateimage', {
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          prompt,
-          size,
-        }),
+        body: JSON.stringify(imageInfo),
       });
 
-      // if (!response.ok) {
-      //   throw new Error("that image could not be generated");
-      // }
+      if (!response.ok) {
+        throw new Error("that image could not be generated");
+      }
 
       const data = await response.json();
       console.log(data);
 
     } catch (error) {
-      console.log(error.message);
+      console.log("Error: ", error.message);
     }
   };
-
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
@@ -54,9 +54,9 @@ const Create = () => {
         />
         <select onChange={(e) => setSize(e.target.value)}>
           <option value="">--SELECT</option>
-          <option value="small">Small</option>
-          <option value="medium">Medium</option>
-          <option value="large">Large</option>
+          <option value="256x256">Small</option>
+          <option value="512x512">Medium</option>
+          <option value="1024x1024">Large</option>
         </select>
         <button>Create!</button>
       </form>
