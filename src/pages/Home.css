@@ -1,0 +1,38 @@
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 3rem auto;
+  gap: 2rem;
+}
+
+.title {
+  display: flex;
+ text-align: center;
+  flex-direction: column;
+  gap: 2rem;
+  width: 50%;
+  margin: 0 auto;
+  font-size: 2rem;
+  
+}
+
+.title h3{
+    color: rgb(40, 251, 156);
+}
+
+
+ a{
+    color: white;
+    text-decoration: none;
+    transition: .5s;
+}
+
+
+ a:hover{
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid rgb(40, 251, 156);
+    color: rgb(40, 251, 156);
+}

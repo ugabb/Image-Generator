@@ -12,9 +12,11 @@ const Navbar = () => {
           <RiHomeLine />
         </Link>
         <Link to={"create"}>Create!</Link>
-        <Link to={"/"}>
+        <a target="_blank" href="https://github.com/ugabb/Image-Generator">
           <FiGithub />
-        </Link>
+        </a>
+          
+        
       </ul>
     </nav>
   );

@@ -1,56 +1,46 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Create.css";
-// const { generateImage } = require('../controllers/openaiController')
+import api from "../api";
 
 const Create = () => {
-  const [userPrompt, setUserPrompt] = useState("dog zombie");
+  const [prompt, setPrompt] = useState("");
   const [size, setSize] = useState("");
-
-  const url = 'http://localhost:5000/create'
+  const [image, setImage] = useState();
+  const [message, setMessage] = useState();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading((prev) => (prev = true));
+    setImage("");
+    setPrompt("");
+    setSize("");
 
-
-    const image = {
-      userPrompt,
-      size
-    }
-  
-    console.log(image);
-
-    generateImageRequest(image);
-  };
-
-  const generateImageRequest = async (imageInfo) => {
     try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(imageInfo),
+      const response = await api.post("/generateimage", {
+        prompt,
+        size,
       });
 
-      if (!response.ok) {
-        throw new Error("that image could not be generated");
-      }
-
-      const data = await response.json();
-      console.log(data);
-
+      console.log(response);
+      setImage(response.data.data);
+      setMessage(response.data.message);
     } catch (error) {
-      console.log("Error: ", error.message);
+      console.log(error);
     }
+
+    setLoading((prev) => (prev = false));
   };
+
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
         <label>Write here what you want to Create!</label>
         <input
           type="text"
-          value={userPrompt}
-          onChange={(e) => setUserPrompt(e.target.value)}
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          placeholder="Write here"
         />
         <select onChange={(e) => setSize(e.target.value)}>
           <option value="">--SELECT</option>
@@ -60,6 +50,13 @@ const Create = () => {
         </select>
         <button>Create!</button>
       </form>
+      {loading && <div className="loader"></div>}
+      {image && (
+        <div className="image-generated">
+          <h2>{message}</h2>
+          <img src={image} alt="" />
+        </div>
+      )}
     </div>
   );
 };
